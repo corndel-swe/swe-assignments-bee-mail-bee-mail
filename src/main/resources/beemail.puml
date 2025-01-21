@@ -1,0 +1,55 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+interface MessageMediator {
+    +void login(User user)
+    +void deliver(User sender, String recipientId, String content)
+}
+
+class Message {
+    -String id
+    -LocalDate timestamp
+    -String content
+    -User from
+    -User to
+    -boolean delivered
+    -boolean read
+
+    +Message(String content, User from, User to)
+    +void log()
+    +void markDelivered()
+    +Message markRead()
+}
+
+class Messenger {
+    -static Messenger messenger
+    -List<User> users
+
+    +static Messenger getInstance()
+    -Messenger()
+    -Optional<User> findUserById(String id)
+    +void login(User user)
+    +void deliver(User sender, String recipientId, String content)
+}
+
+class User {
+    -String id
+    -String userName
+    -List<Message> inbox
+    -MessageMediator mediator
+
+    +User(String id, String userName)
+    +void sendMessage(String recipient, String content)
+    +void receiveMessage(Message message)
+    +void readMessage(int index)
+    +String getId()
+    +String getUserName()
+    +void setMediator(MessageMediator mediator)
+}
+
+Message --- User
+
+Messenger - User
+
+Messenger ..|> MessageMediator
+@enduml

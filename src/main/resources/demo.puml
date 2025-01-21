@@ -1,0 +1,63 @@
+
+@startuml
+'https://plantuml.com/class-diagram
+
+    abstract class Device {
+        protected String location
+        protected Mediator mediator
+        +Device(String location)
+        +String getLocation()
+        +void setMediator(Mediator mediator)
+        +abstract void action()
+    }
+
+    interface Mediator {
+        +void addDevice(Device device)
+        +void addDevice(List<Device> devices)
+        +void detect(Device device)
+    }
+
+    class SmartCamera extends Device {
+        +SmartCamera(String location)
+        +void action()
+        +void detectMotion()
+        -void startRecording()
+    }
+
+    class SmartHome implements Mediator {
+        -List<Device> devices
+        -static SmartHome instance
+        -SmartHome()
+        +static SmartHome getInstance()
+        +void addDevice(Device device)
+        +void addDevice(List<Device> devices)
+        +void detect(Device device)
+    }
+
+    class SmartLight extends Device {
+        +SmartLight(String location)
+        +void action()
+        +void turnOn()
+    }
+
+ class Doorbell {
+        - boolean isRinging
+        + Doorbell()
+        + boolean isRinging()
+        + void ring()
+        + void stopRinging()
+    }
+
+    class DoorbellAdapter extends Device {
+        - final Doorbell doorbell
+        + DoorbellAdapter(String location)
+        + void ring()
+        + void action()
+    }
+
+
+    Device <-> Mediator
+    DoorbellAdapter -> Doorbell : uses
+
+@enduml
+
