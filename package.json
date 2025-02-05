@@ -1,0 +1,12 @@
+{
+  "name": "bee-mail",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "<p align=\"center\">   <img src=\"logo.png\" width=\"200px\" alt=\"Bee Mail Logo\"> </p>",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
